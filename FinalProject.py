@@ -105,7 +105,7 @@ if __name__ == '__main__':                      # Program starts here
                 
                 if numWhiteLeft > numWhiteRight and numWhiteLeft > numWhiteMiddle: #coming from left
                     state = 1
-                    pwm.set_pwm(0, 0, servoSetting(180))
+                    pwm.set_pwm(0, 0, servoSetting(130))
 
                     #moveLeft
                 elif numWhiteMiddle > numWhiteLeft and numWhiteMiddle > numWhiteRight:
@@ -116,7 +116,7 @@ if __name__ == '__main__':                      # Program starts here
                     #middle       
                 elif numWhiteRight > numWhiteLeft and numWhiteRight > numWhiteMiddle:
                     state = 2
-                    pwm.set_pwm(0, 0, servoSetting(1))
+                    pwm.set_pwm(0, 0, servoSetting(35))
                     GPIO.output(LedPin1, GPIO.HIGH)   # led on
                     GPIO.output(LedPin2, GPIO.HIGH)   # led on
                 else:
@@ -125,10 +125,12 @@ if __name__ == '__main__':                      # Program starts here
                     GPIO.output(LedPin1, GPIO.LOW)   # led off
 
                     #turnright
-                if numWhiteRight + numWhiteLeft + numWhiteMiddle > 100:
+                if numWhiteRight + numWhiteLeft + numWhiteMiddle > 60000:
                     pygame.mixer.music.load('bigbrother.mp3')
                     pygame.mixer.music.play(loops=0, start=0.0)
-                    
+                elif numWhiteRight + numWhiteLeft + numWhiteMiddle > 140000:
+                    pygame.mixer.music.load('moveback.mp3')
+                    pygame.mixer.music.play(loops=0, start=0.0)
                 cv2.imshow("Mask", nextGray)
                 cv2.imshow("OtherMask", nextGrayBlur)
                 cv2.imshow("newImage", bestImage)
